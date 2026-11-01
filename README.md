@@ -67,12 +67,21 @@ environment). Screenshots of the execution:
 
 ![BITS Virtual Lab session running](virtual_lab/lab_session.png)
 
-## f. Streamlit app features
-- Upload a test CSV file (`test_data.csv`)
-- Evaluate all five models with one click
-- Comparison of Accuracy, AUC, Precision, Recall, F1 and MCC
-- Model selection dropdown with confusion matrix and classification report
-- Final result tab showing the recommended model and how it was chosen
+## f. Streamlit app features and how to use it
+**Steps to use the app**
+1. Open the app link: https://phishing-website-detection-2025ns04119.streamlit.app
+2. Click **Upload** under the title card and select `test_data.csv` from this repository.
+3. Click **Evaluate all models**. All five models are scored on the uploaded file.
+4. Explore the results in the four tabs below the test data summary.
+
+**What each part of the app shows**
+- **Test data summary:** number of test records, input features, and actual phishing and legitimate counts.
+- **Comparison tab:** table and bar chart of Accuracy, AUC, Precision, Recall, F1 and MCC for all five models, with a short interpretation of each model.
+- **Model details tab:** choose a model from the dropdown to see its metrics, confusion matrix and classification report.
+- **Final result tab:** the recommended model and how it was chosen (ranked by MCC, with F1 as tie-breaker).
+- **Data preview tab:** the first 15 rows of the uploaded file.
+
+The uploaded file must have the same 81 feature columns as `test_data.csv` plus the `status` column (1 = phishing, 0 = legitimate).
 
 ## g. Project structure
 ```
@@ -80,7 +89,7 @@ app.py                    Streamlit app (upload test CSV, evaluate all models)
 requirements.txt          Python dependencies
 README.md                 This file
 test_data.csv             Test data (upload this in the app)
-lab_*.png                 Screenshots of the run on BITS Virtual Lab
+virtual_lab/              Screenshots of the run on BITS Virtual Lab
 model/                    train_pipeline.py, train_data.csv, saved models (*.pkl), metrics_summary.csv
 ```
 
