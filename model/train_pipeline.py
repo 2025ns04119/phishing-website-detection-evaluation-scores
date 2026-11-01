@@ -20,7 +20,7 @@ from sklearn.tree import DecisionTreeClassifier
 
 ROOT = Path(__file__).resolve().parent.parent
 MODEL_DIR = ROOT / "model"
-TARGET = "class"          # 1 = phishing, 0 = legitimate
+TARGET = "status"        # 1 = phishing, 0 = legitimate
 SEED = 2025
 
 

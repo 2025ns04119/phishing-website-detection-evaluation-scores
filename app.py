@@ -16,7 +16,7 @@ from sklearn.metrics import (accuracy_score, classification_report, confusion_ma
 
 ROOT = Path(__file__).resolve().parent
 MODEL_DIR = ROOT / "model"
-TARGET = "class"
+TARGET = "status"        # 1 = phishing, 0 = legitimate
 LABELS = ["Legitimate", "Phishing"]
 MODEL_NAMES = ["Logistic Regression", "Decision Tree", "kNN", "Naive Bayes", "SVM"]
 
@@ -314,8 +314,8 @@ def run_app():
         '<div class="lbl">Problem statement</div>'
         "<p>Classify whether a website URL is a legitimate page or a phishing attempt designed to "
         "steal user credentials. Blacklists cannot keep up with newly generated URLs, so the models "
-        "here learn from 30 structural URL and page attributes (for example URL length, presence of "
-        "an IP address, HTTPS usage and redirects) to flag fraudulent links.</p>"
+        "here learn from 81 URL, page-content and domain attributes (for example URL length, number "
+        "of dots and hyphens, use of an IP address, and domain age) to flag fraudulent links.</p>"
         '<div class="lbl">Objective</div>'
         "<p>Train five classifiers on labelled website data, then evaluate them on unseen test data "
         "using Accuracy, AUC, Precision, Recall, F1 and MCC to identify the most reliable model.</p>"
@@ -325,7 +325,7 @@ def run_app():
         unsafe_allow_html=True)
 
     with st.container(border=True):
-        upload = st.file_uploader("Upload test_data.csv (30 feature columns plus a `class` column: "
+        upload = st.file_uploader("Upload test_data.csv (81 feature columns plus a `status` column: "
                                   "1 = phishing, 0 = legitimate)", type="csv")
         run = st.button("Evaluate all models", type="primary", disabled=upload is None)
 
@@ -343,8 +343,8 @@ def run_app():
     st.markdown('<div class="sect">Test data summary</div>', unsafe_allow_html=True)
     stats = [("Test records", f"{len(df):,}", "websites (rows)"),
              ("Input features", X.shape[1], "attributes per website"),
-             ("Actual phishing", f"{int((y == 1).sum()):,}", "records with class = 1"),
-             ("Actual legitimate", f"{int((y == 0).sum()):,}", "records with class = 0")]
+             ("Actual phishing", f"{int((y == 1).sum()):,}", "records with status = 1"),
+             ("Actual legitimate", f"{int((y == 0).sum()):,}", "records with status = 0")]
     for col, (label, value, note) in zip(st.columns(4), stats):
         col.markdown(kpi(label, value, note), unsafe_allow_html=True)
 
