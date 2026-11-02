@@ -93,7 +93,7 @@ virtual_lab/              Screenshots of the run on BITS Virtual Lab
 model/                    train_pipeline.py, train_data.csv, saved models (*.pkl), metrics_summary.csv
 ```
 
-## h. How to run
+## h. How to run in vscode
 ```bash
 pip install -r requirements.txt
 python model/train_pipeline.py     # trains and saves the 5 models
@@ -101,7 +101,7 @@ streamlit run app.py
 ```
 Upload `test_data.csv` in the app and click **Evaluate all models**.
 
-## i. Column meanings
+## i. Dataset description - continuation from b. (description about features in the dataset)
 `status` is the target (1 = phishing, 0 = legitimate). The other columns are the input features.
 Columns marked *(removed)* hold one constant value in the dataset and were dropped before training.
 
